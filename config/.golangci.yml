@@ -1,0 +1,50 @@
+run:
+  timeout: 5m
+
+linters:
+  enable-all: true
+  disable:
+    # deprecated
+    - deadcode
+    - exhaustivestruct
+    - golint
+    - ifshort
+    - interfacer
+    - maligned
+    - nosnakecase
+    - scopelint
+    - structcheck
+    - varcheck
+    # overly strict
+    - exhaustruct
+    # Use named returns when it makes sense
+    - nonamedreturns
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+linters-settings:
+  forbidigo:
+    forbid:
+      - '^$'
+
+  varnamelen:
+    ignore-names:
+      - tc
+
+  gci:
+    sections:
+      # std.
+      - standard
+      # extensions.
+      - prefix(golang.org)
+      # 3rd party.
+      - prefix(github.com)
+      - default
+    custom-order: true
+
+  gomnd:
+    ignored-functions:
+      - time.Duration

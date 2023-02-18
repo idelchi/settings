@@ -1,0 +1,20 @@
+---
+version: '3.7'
+
+services:
+  devenv:
+    image: devenv:latest
+    container_name: devenv
+    hostname: devenv
+    build:
+      context: .
+    ports:
+      # <host:container>
+      # GoDoc
+      - 8888:8888
+      # Go Profilers
+      - 10000-10200:10000-10200
+    network_mode: bridge
+    user: user
+    volumes:
+      - ${PWD}:/home/user

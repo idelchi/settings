@@ -1,0 +1,21 @@
+language: en-gb
+
+# Paths are relative to this file
+ignorePaths:
+  - '../.build'
+  - '../.exp'
+  - '.cache'
+  - '.task'
+  - '.vscode-server'
+  - '../../settings'
+
+dictionaries:
+  - bash
+  - cpp
+  - golang
+  - python
+  - project-words
+
+dictionaryDefinitions:
+  - name: project-words
+    path: settings/config/project-words

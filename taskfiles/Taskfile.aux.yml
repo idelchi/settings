@@ -1,0 +1,6 @@
+version: '3'
+
+tasks:
+  todo: grep --exclude-dir={.cache,.git,.task,build} -rwo -n . --regexp 'TODO[:(].*'
+
+  graph: yml2dot {{.CLI_ARGS}}.yml | dot -Tpng > {{.CLI_ARGS}}.png

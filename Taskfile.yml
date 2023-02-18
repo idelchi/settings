@@ -1,0 +1,71 @@
+version: '3'
+
+env:
+  SETTINGS_DIR: '.'
+
+  CONFIG_DIR: '{{.SETTINGS_DIR}}/config'
+  SCRIPTS_DIR: '{{.SETTINGS_DIR}}/scripts'
+
+includes:
+  go: taskfiles/Taskfile.go.yml
+  python: taskfiles/Taskfile.python.yml
+  lint: taskfiles/Taskfile.lint.yml
+  format: taskfiles/Taskfile.format.yml
+  git: taskfiles/Taskfile.git.yml
+  aux: taskfiles/Taskfile.aux.yml
+
+silent: false
+
+output: prefixed
+
+tasks:
+  clean:
+    - task: go:clean
+    - rm -rf .task
+
+  format:
+    - task: format:all
+    - task: go:format
+
+  lint:
+    deps:
+      - lint:all
+      - go:lint
+
+  build:
+    - task: go:build
+    - task: go:release
+
+  test:
+    - task: go:quality
+
+  # ---------
+  all:
+    desc: run all available tasks
+    cmds:
+      - task: git:info
+      - task: clean
+      - task: format
+      - task: lint
+      - task: build
+      - task: test
+
+  # default 'format & lint' target
+  # ---------
+  default:
+    desc: clean, format & lint
+    cmds:
+      - task: git:info
+      - task: format
+      - task: lint
+
+  # Copy over the project specific files
+  copy:
+    cmds:
+      - |
+        # cp -r .vscode ..
+        # cp Taskfile.yml ..
+    status:
+      # if the files are already present, don't copy them
+      - test -d ../.vscode
+      - test -f Taskfile.yml

@@ -1,0 +1,67 @@
+# ~ - prefix that tells the spell checker to only use the word when case sensitivity is turned off.
+# + - prefix/suffix that tells the spell checker that a word MUST be combined with another word to be valid.
+# * - prefix/suffix that tells the spell checker that a word can be combined with another word.
+# ! - prefix forbid a word.
+
+# cspell --config=config/cspell.config.yaml --words-only --unique "**" | sort --ignore-case >> project-words.txt
+
+checkstyle
+cjson
+cobertura
+codespell
+colored
+configor
+coverprofile
+devenv
+dockerfilelint
+dockerfiles
+genprofile
+gnupg
+gocover
+goda
+godoc
+godox
+gofmt
+gofumpt
+GOLANGCI
+golangci
+gonic
+gotest
+gotestsum
+HADOLINT
+hadolint
+idelchi
+jflint
+jinzhu
+jsonlint
+junitfile
+Linters
+linters
+loov
+lucasepe
+markdownlint
+msan
+mvdan
+nodefraction
+noninteractive
+nuspell
+prantlf
+profilegen
+profileview
+PYRIGHT
+pyright
+scspell
+Taskfile
+taskfiles
+testcache
+testname
+tfile
+Tpng
+yuki
+
+
+wslint
+bmatcuk
+funlen
+nolint
+SHLVL
