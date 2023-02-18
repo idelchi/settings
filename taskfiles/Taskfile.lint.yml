@@ -97,8 +97,8 @@ tasks:
       - cspell lint --show-suggestions --config={{.CONFIG}} --no-progress "**"
       - codespell --ignore-words={{.WORDLIST}} {{.FILES}}
     vars:
-      CONFIG: '{{.CONFIG_DIR}}/cspell.config.yaml'
-      WORDLIST: '{{.CONFIG_DIR}}/project-words'
+      CONFIG: '{{.CONFIG_DIR}}/cspell.yaml'
+      WORDLIST: '{{.CONFIG_DIR}}/default-words'
       FILES:
         sh: >-
           find . -type f -name '*'
