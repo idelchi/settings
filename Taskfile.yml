@@ -2,7 +2,6 @@ version: '3'
 
 vars:
   SETTINGS_DIR: '.'
-  TASKFILES_DIR: 'taskfiles'
 
 env:
   SETTINGS_DIR: '.'
@@ -11,12 +10,12 @@ env:
   SCRIPTS_DIR: '{{.SETTINGS_DIR}}/scripts'
 
 includes:
-  go: '{{.TASKFILES_DIR}}/Taskfile.go.yml'
-  python: '{{.TASKFILES_DIR}}/Taskfile.python.yml'
-  lint: '{{.TASKFILES_DIR}}/Taskfile.lint.yml'
-  format: '{{.TASKFILES_DIR}}/Taskfile.format.yml'
-  git: '{{.TASKFILES_DIR}}/Taskfile.git.yml'
-  aux: '{{.TASKFILES_DIR}}/Taskfile.aux.yml'
+  go: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.go.yml'
+  python: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.python.yml'
+  lint: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.lint.yml'
+  format: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.format.yml'
+  git: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.git.yml'
+  aux: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.aux.yml'
 
 silent: false
 
