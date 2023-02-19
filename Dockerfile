@@ -155,7 +155,10 @@ RUN go mod init project && \
     go get github.com/gin-gonic/gin && \
     go get github.com/jinzhu/configor && \
     go get github.com/bmatcuk/doublestar/v4 && \
-    go get golang.org/x/exp
+    go get golang.org/x/exp && \
+    go get golang.org/x/tools && \
+    go get golang.org/x/exp@v0.0.0-20230206171751-46f607a40771 && \
+    go get golang.org/x/tools@v0.2.0
 
 ENV TZ=Europe/Zurich
 
