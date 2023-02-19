@@ -3,7 +3,6 @@
 *.lnk
 
 # Ignored files
-*.bat
 .bash_history
 .gitconfig
 
