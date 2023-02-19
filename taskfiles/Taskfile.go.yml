@@ -191,7 +191,7 @@ tasks:
         echo "Coverage is ${coverage}"
         got=${coverage%\%}; got=${got%.*}
         want=${want%\%}; want=${want%.*}
-        echo "coverage: $got" >> build/results
+        echo "coverage: $got" >> {{.BUILD}}/results
         if (( got < want )); then
           echo "Coverage (floored) ${got}% lower than expected ${want}%"
           exit 1
