@@ -148,7 +148,8 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
     go install mvdan.cc/gofumpt@latest && \
     go install mvdan.cc/sh/v3/cmd/shfmt@latest && \
     go install github.com/loov/goda@latest && \
-    go install github.com/lucasepe/yml2dot@latest
+    go install github.com/lucasepe/yml2dot@latest && \
+    go install github.com/segmentio/golines@latest
 
 # Pre-download some dependencies
 RUN go mod init project && \

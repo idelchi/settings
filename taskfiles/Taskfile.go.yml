@@ -63,6 +63,7 @@ tasks:
     desc: format go project
     cmds:
       - gofmt -l -s -e -w .
+      - golines -w -m 120 .
       - >
         golangci-lint run
         --config={{.GOLANGCI_LINT_CFG}}
@@ -73,6 +74,9 @@ tasks:
     sources:
       - ./**/*.go
       - ./.golangci.yml
+    preconditions:
+      - sh: test $(which golines)
+        msg: 'golines is missing'
 
   lint:
     desc: lint go project
