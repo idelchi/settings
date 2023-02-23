@@ -22,7 +22,7 @@ tasks:
   default:
     cmds:
       - git add .
-      - cmd: git commit -m "go"
+      - cmd: git commit -m "Development commit"
         ignore_error: true
       - cmd: git push
         ignore_error: true
