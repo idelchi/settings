@@ -138,7 +138,7 @@ USER user
 WORKDIR /home/user
 
 # Go tooling
-ARG GOLANGCI_LINT_VERSION=v1.51.1
+ARG GOLANGCI_LINT_VERSION=v1.51.2
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)/bin" ${GOLANGCI_LINT_VERSION} && \
     go install github.com/go-task/task/v3/cmd/task@latest && \
     go install golang.org/x/tools/cmd/godoc@latest && \
