@@ -27,6 +27,7 @@ gofmt
 gofumpt
 GOLANGCI
 golangci
+golines
 gonic
 gotest
 gotestsum
@@ -53,6 +54,7 @@ profileview
 PYRIGHT
 pyright
 scspell
+segmentio
 Taskfile
 taskfiles
 testcache
