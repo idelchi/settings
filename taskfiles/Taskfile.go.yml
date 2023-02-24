@@ -99,6 +99,8 @@ tasks:
     preconditions:
       - sh: '[[ -z $(gofmt -l -d -s -e .) ]]'
         msg: 'go files have not been formatted with gofmt'
+      - sh: '[[ -z $(golines -m 120 --shorten-comments --dry-run .) ]]'
+        msg: 'go files have not been formatted with golines'
 
   # Quality
   # ---------
