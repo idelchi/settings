@@ -174,16 +174,22 @@ tasks:
         for package in {{.PACKAGES}}; do
           prefix={{.PROJECT}}
           pkg=${package#$prefix}
+
+          #skipping root package
+          if [ -z "$pkg" ]; then
+            continue
+          fi
+
           file="./$pkg/*_test.go"
           if ! ls $file 1> /dev/null 2>&1; then
-              echo "$package is missing a _test.go file, creating it!"
-              if [ -z "$pkg" ]; then
-                basename=$(basename $prefix)
-              else
-                basename=$(basename $pkg)
-              fi
-              test_file=./$pkg/${basename}_test.go
-              echo "package ${basename}_test" >> $test_file
+            echo "$package is missing a _test.go file, creating it!"
+            if [ -z "$pkg" ]; then
+              basename=$(basename $prefix)
+            else
+              basename=$(basename $pkg)
+            fi
+            test_file=./$pkg/${basename}_test.go
+            echo "package ${basename}_test" >> $test_file
           fi
         done
 
