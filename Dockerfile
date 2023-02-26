@@ -148,7 +148,9 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
     go install mvdan.cc/sh/v3/cmd/shfmt@latest && \
     go install github.com/loov/goda@latest && \
     go install github.com/lucasepe/yml2dot@latest && \
-    go install github.com/segmentio/golines@latest
+    go install github.com/segmentio/golines@latest && \
+    go install golang.org/x/tools/cmd/guru@latest && \
+    go install honnef.co/go/implements@latest
 
 # Pre-download some dependencies
 RUN go mod init project && \
