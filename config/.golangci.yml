@@ -47,6 +47,8 @@ linters-settings:
       - prefix(golang.org)
       # 3rd party.
       - prefix(github.com)
+      # custom
+      - prefix(github.com/idelchi)
       - default
     custom-order: true
 
