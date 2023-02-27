@@ -15,6 +15,6 @@ services:
       # Go Profilers
       - 10000-10200:10000-10200
     network_mode: bridge
-    user: root
+    user: user
     volumes:
       - ${PWD}:/home/user
