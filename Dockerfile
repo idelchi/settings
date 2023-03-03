@@ -124,6 +124,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN groupadd -r -g 1000 user && \
     useradd -r -u 1000 -g 1000 -m -c "user account" -d /home/user -s /bin/bash user
 
+# Python tooling
+# hadolint ignore=SC2102
+RUN pip install --no-cache-dir \
+    prospector[with_everything] \
+    pyright \
+    black \
+    isort
+
+ENV NPM_CONFIG_CACHE=/tmp/.npm
+ENV XDG_CONFIG_HOME=/tmp/.config
+ENV XDG_CACHE_HOME=/tmp/.cache
+ENV MYPY_CACHE_DIR=/tmp/.mypy_cache
+
 # Install Go
 ARG GO_VERSION=go1.20.linux-amd64
 RUN wget -qO- https://go.dev/dl/${GO_VERSION}.tar.gz | tar -xz -C /usr/local
@@ -154,27 +167,13 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 
 # Pre-download some dependencies
 RUN go mod init project && \
+    go get github.com/stretchr/testify && \
     go get github.com/gin-gonic/gin && \
     go get github.com/jinzhu/configor && \
     go get github.com/bmatcuk/doublestar/v4 && \
     go get golang.org/x/exp && \
     go get golang.org/x/tools && \
-    go get golang.org/x/exp@v0.0.0-20230206171751-46f607a40771 && \
-    go get golang.org/x/tools@v0.2.0
+    go get gopkg.in/yaml.v3 && \
+    go get gopkg.in/check.v1@v0.0.0-20161208181325-20d25e280405
 
 ENV TZ=Europe/Zurich
-
-USER root
-# hadolint ignore=SC2102
-RUN pip install --no-cache-dir \
-    prospector[with_everything] \
-    pyright \
-    black \
-    isort
-
-ENV NPM_CONFIG_CACHE=/tmp/.npm
-ENV XDG_CONFIG_HOME=/tmp/.config
-ENV XDG_CACHE_HOME=/tmp/.cache
-ENV MYPY_CACHE_DIR=/tmp/.mypy_cache
-
-USER user
