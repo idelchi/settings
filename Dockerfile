@@ -165,15 +165,17 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
     go install golang.org/x/tools/cmd/guru@latest && \
     go install honnef.co/go/implements@latest
 
-# Pre-download some dependencies
-RUN go mod init project && \
-    go get github.com/stretchr/testify && \
-    go get github.com/gin-gonic/gin && \
-    go get github.com/jinzhu/configor && \
-    go get github.com/bmatcuk/doublestar/v4 && \
-    go get golang.org/x/exp && \
-    go get golang.org/x/tools && \
-    go get gopkg.in/yaml.v3 && \
-    go get gopkg.in/check.v1@v0.0.0-20161208181325-20d25e280405
+# Pre-download some useful packages and dependencies
+RUN go mod download \
+    github.com/stretchr/testify@latest \
+    github.com/davecgh/go-spew@latest \
+    gopkg.in/yaml.v3@latest \
+    github.com/gin-gonic/gin@latest \
+    github.com/jinzhu/configor@latest \
+    github.com/bmatcuk/doublestar/v4@latest \
+    golang.org/x/exp@latest \
+    golang.org/x/tools@latest \
+    golang.org/x/exp@v0.0.0-20230224173230-c95f2b4c22f2 \
+    gopkg.in/check.v1@v0.0.0-20161208181325-20d25e280405
 
 ENV TZ=Europe/Zurich

@@ -33,6 +33,7 @@ gotest
 gotestsum
 HADOLINT
 hadolint
+honnef
 idelchi
 jflint
 jinzhu
