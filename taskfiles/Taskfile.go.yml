@@ -108,7 +108,6 @@ tasks:
     desc: test go project
     deps: [init]
     cmds:
-      - go clean -testcache
       - go test {{.CLI_ARGS}} -parallel 6 {{.MODE}} {{.PACKAGES}} {{.TEST_FLAGS}}
     env:
       CC: '{{.CC}}'
@@ -125,7 +124,6 @@ tasks:
         vars:
           MODE: '-gcflags=-l -tags cover -covermode=set --coverprofile {{.COVER_REPORT}}.cov'
           RUN_MONKEY_PATCH_TESTS: 'true'
-
       - go tool cover -html={{.COVER_REPORT}}.cov -o {{.COVER_REPORT}}.html
     vars:
       COVER_REPORT: '{{.BUILD}}/{{.COVER_REPORT}}'
@@ -155,7 +153,6 @@ tasks:
     desc: generate profiles for go project
     deps: [init]
     cmds:
-      - go clean -testcache
       - '{{.SCRIPTS_DIR}}/profilegen.sh {{.BENCH}} -d {{.BUILD}} -p {{.PROJECT}} {{.PACKAGES}}'
     vars:
       BENCH: '{{if eq .BENCH "true"}}-b{{else}}{{end}}'
