@@ -31,6 +31,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     graphviz \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+
+### CERTIFICATE SPECIFICS ###
+# Update CA Certificates with current certificates
+COPY .secrets/pip.conf /etc/pip.conf
+COPY .secrets/*.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates --fresh
+### CERTIFICATE SPECIFICS ###
+
+
 # Update node to version 14
 RUN curl -sL https://deb.nodesource.com/setup_19.x | bash -
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -138,7 +147,7 @@ ENV XDG_CACHE_HOME=/tmp/.cache
 ENV MYPY_CACHE_DIR=/tmp/.mypy_cache
 
 # Install Go
-ARG GO_VERSION=go1.20.linux-amd64
+ARG GO_VERSION=go1.20.1.linux-amd64
 RUN wget -qO- https://go.dev/dl/${GO_VERSION}.tar.gz | tar -xz -C /usr/local
 ENV PATH="/usr/local/go/bin:$PATH"
 
@@ -150,20 +159,26 @@ USER user
 WORKDIR /home/user
 
 # Go tooling
+RUN echo \
+    # Commands
+    github.com/go-task/task/v3/cmd/task@latest \
+    golang.org/x/tools/cmd/godoc@latest \
+    gotest.tools/gotestsum@latest  \
+    github.com/t-yuki/gocover-cobertura@latest \
+    github.com/client9/misspell/cmd/misspell@latest  \
+    mvdan.cc/gofumpt@latest  \
+    mvdan.cc/sh/v3/cmd/shfmt@latest  \
+    github.com/loov/goda@latest  \
+    github.com/lucasepe/yml2dot@latest  \
+    github.com/segmentio/golines@latest  \
+    golang.org/x/tools/cmd/guru@latest  \
+    honnef.co/go/implements@latest  \
+    rsc.io/tmp/uncover@latest \
+    # Feed to 'go install'
+    | xargs -n 1 go install
+
 ARG GOLANGCI_LINT_VERSION=v1.51.2
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)/bin" ${GOLANGCI_LINT_VERSION} && \
-    go install github.com/go-task/task/v3/cmd/task@latest && \
-    go install golang.org/x/tools/cmd/godoc@latest && \
-    go install gotest.tools/gotestsum@latest && \
-    go install github.com/t-yuki/gocover-cobertura@latest && \
-    go install github.com/client9/misspell/cmd/misspell@latest && \
-    go install mvdan.cc/gofumpt@latest && \
-    go install mvdan.cc/sh/v3/cmd/shfmt@latest && \
-    go install github.com/loov/goda@latest && \
-    go install github.com/lucasepe/yml2dot@latest && \
-    go install github.com/segmentio/golines@latest && \
-    go install golang.org/x/tools/cmd/guru@latest && \
-    go install honnef.co/go/implements@latest
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)/bin" ${GOLANGCI_LINT_VERSION}
 
 # Pre-download some useful packages and dependencies
 RUN go mod download \
@@ -175,6 +190,7 @@ RUN go mod download \
     github.com/bmatcuk/doublestar/v4@latest \
     golang.org/x/exp@latest \
     golang.org/x/tools@latest \
+    golang.org/x/tools@v0.6.0 \
     golang.org/x/exp@v0.0.0-20230224173230-c95f2b4c22f2 \
     gopkg.in/check.v1@v0.0.0-20161208181325-20d25e280405
 

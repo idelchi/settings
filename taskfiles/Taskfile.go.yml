@@ -168,6 +168,29 @@ tasks:
       - './{{.COVER_REPORT}}.cov'
       - './{{.COVER_REPORT}}.html'
 
+  coverlines:
+    deps: [cover]
+    cmds:
+      - |
+        lines=$(uncover {{.COVER_REPORT}}.cov)
+
+        if [ -z "$lines" ]; then
+          echo "no uncovered lines"
+          exit 0
+        fi
+
+        ignore_tag="//cover:ignore"
+        while read -r line; do
+          if [[ $line =~ ^[[:space:]] ]]; then
+            if [[ $line != *"$ignore_tag"* ]]; then
+              echo "uncovered line(s) detected"
+              exit 1
+            fi
+          fi
+        done <<< "$lines"
+    vars:
+      COVER_REPORT: '{{.BUILD}}/{{.COVER_REPORT}}'
+
   cover-prereq:
     cmds:
       - |
@@ -203,7 +226,7 @@ tasks:
         echo "Coverage is ${coverage}"
         got=${coverage%\%}; got=${got%.*}
         want=${want%\%}; want=${want%.*}
-        echo "coverage: $got" >> {{.BUILD}}/results
+        echo "coverage: $got" > {{.BUILD}}/coverage-results
         if (( got < want )); then
           echo "Coverage (floored) ${got}% lower than expected ${want}%"
           exit 1
