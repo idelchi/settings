@@ -138,7 +138,7 @@ ENV XDG_CACHE_HOME=/tmp/.cache
 ENV MYPY_CACHE_DIR=/tmp/.mypy_cache
 
 # Install Go
-ARG GO_VERSION=go1.20.1.linux-amd64
+ARG GO_VERSION=go1.20.2.linux-amd64
 RUN wget -qO- https://go.dev/dl/${GO_VERSION}.tar.gz | tar -xz -C /usr/local
 ENV PATH="/usr/local/go/bin:$PATH"
 

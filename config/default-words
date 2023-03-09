@@ -12,6 +12,7 @@ cobertura
 codespell
 colored
 configor
+coverlines
 coverprofile
 devenv
 dockerfilelint
