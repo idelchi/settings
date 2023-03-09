@@ -31,15 +31,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     graphviz \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-### CERTIFICATE SPECIFICS ###
-# Update CA Certificates with current certificates
-COPY .secrets/pip.conf /etc/pip.conf
-COPY .secrets/*.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates --fresh
-### CERTIFICATE SPECIFICS ###
-
-
 # Update node to version 14
 RUN curl -sL https://deb.nodesource.com/setup_19.x | bash -
 RUN apt-get update && apt-get install -y --no-install-recommends \
