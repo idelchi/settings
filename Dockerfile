@@ -151,7 +151,7 @@ WORKDIR /home/user
 
 # Go tooling
 RUN echo \
-    # Commands
+    # Commands to install
     github.com/go-task/task/v3/cmd/task@latest \
     golang.org/x/tools/cmd/godoc@latest \
     gotest.tools/gotestsum@latest  \
