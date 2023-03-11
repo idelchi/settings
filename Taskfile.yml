@@ -1,23 +1,26 @@
 version: '3'
 
-# TODO: Change to vars and pass to each taskfile (?)
-env:
-  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
-  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
-
 includes:
-  go: 'taskfiles/Taskfile.go.yml'
-  python: 'taskfiles/Taskfile.python.yml'
+  aux: 'taskfiles/Taskfile.aux.yml'
+  git: 'taskfiles/Taskfile.git.yml'
   lint: 'taskfiles/Taskfile.lint.yml'
   format: 'taskfiles/Taskfile.format.yml'
-  git: 'taskfiles/Taskfile.git.yml'
-  aux: 'taskfiles/Taskfile.aux.yml'
+  python: 'taskfiles/Taskfile.python.yml'
+  go: 'taskfiles/Taskfile.go.yml'
 
 silent: true
 
 output: prefixed
 
 tasks:
+  info:
+    cmds:
+      - |
+        echo "Root directory: '{{.ROOT_DIR}}'"
+        echo "User working directory: '{{.USER_WORKING_DIR}}'"
+        echo "Config directory: {{.PARENT_CONFIG_DIR}}"
+        echo "Scripts directory: {{.PARENT_SCRIPTS_DIR}}"
+
   clean:
     - task: go:clean
     - rm -rf .task
@@ -57,7 +60,3 @@ tasks:
       - task: git:info
       - task: format
       - task: lint
-
-  verify:
-    cmds:
-      - docker compose run go task

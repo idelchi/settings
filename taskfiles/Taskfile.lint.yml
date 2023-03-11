@@ -2,9 +2,8 @@ version: '3'
 
 vars:
   # Externally passed configuration locations
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
   SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
-  CONFIG_DIR: '{{.CONFIG_DIR | default "."}}'
-  IGNORE: '{{.CONFIG_DIR}}/.ignore'
 
 tasks:
   # TODO: Write this as a Go-tool!
@@ -56,9 +55,10 @@ tasks:
   json:
     cmds:
       - prettier --config={{.CONFIG}} --ignore-path={{.IGNORE}} --check "**/*.json"
-      # - jsonlint --mode=cjson --quiet .
+      - jsonlint --mode=cjson --quiet .
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
+      IGNORE: '{{.CONFIG_DIR}}/.ignore'
     sources:
       - ./**/*.json
 
@@ -69,6 +69,7 @@ tasks:
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
       CONFIG_YAML: '{{.CONFIG_DIR}}/.yamllint.yml'
+      IGNORE: '{{.CONFIG_DIR}}/.ignore'
     sources:
       - ./**/*.yaml
       - ./**/*.yml
@@ -77,6 +78,8 @@ tasks:
     cmds:
       - markdownlint --disable MD013 --ignore-path={{.IGNORE}} "**/*.md"
       - prettier --ignore-path={{.IGNORE}} --check "**/*.md"
+    vars:
+      IGNORE: '{{.CONFIG_DIR}}/.ignore'
     sources:
       - ./**/*.md
 

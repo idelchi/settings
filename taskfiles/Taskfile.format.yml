@@ -2,9 +2,8 @@ version: '3'
 
 vars:
   # Externally passed configuration locations
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
   SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
-  CONFIG_DIR: '{{.CONFIG_DIR | default "."}}'
-  IGNORE: '{{.CONFIG_DIR}}/.ignore'
 
 tasks:
   ws: |
@@ -41,6 +40,7 @@ tasks:
       - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.json"
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
+      IGNORE: '{{.CONFIG_DIR}}/.ignore'
     sources:
       - ./**/*.json
 
@@ -49,6 +49,7 @@ tasks:
       - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.yaml" "**/*.yml"
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
+      IGNORE: '{{.CONFIG_DIR}}/.ignore'
     sources:
       - ./**/*.yaml
       - ./**/*.yml
@@ -60,6 +61,7 @@ tasks:
       - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.md"
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
+      IGNORE: '{{.CONFIG_DIR}}/.ignore'
     sources:
       - ./**/*.md
 

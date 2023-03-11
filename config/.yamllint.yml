@@ -6,4 +6,4 @@ rules:
   comments: disable
   truthy:
     ignore: |
-      .github/workflows
+      **/.github/workflows

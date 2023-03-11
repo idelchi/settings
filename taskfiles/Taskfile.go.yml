@@ -16,10 +16,8 @@ vars:
       echo $(go list ./...)
 
   # Externally passed configuration locations
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
   SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
-  GO_SCRIPTS: '{{.SCRIPTS_DIR}}/go'
-  CONFIG_DIR: '{{.CONFIG_DIR | default "."}}'
-  GOLANGCI_LINT_CFG: '{{.CONFIG_DIR}}/.golangci.yml'
 
 tasks:
   # Utilities
@@ -72,6 +70,8 @@ tasks:
         --fix
         --issues-exit-code 0
         &> /dev/null
+    vars:
+      GOLANGCI_LINT_CFG: '{{.CONFIG_DIR}}/.golangci.yml'
     sources:
       - ./**/*.go
       - ./.golangci.yml
@@ -93,6 +93,7 @@ tasks:
         code-climate:{{.LINT_REPORT}},junit-xml:{{.LINT_REPORT}}.xml,checkstyle:{{.LINT_REPORT}}.checkstyle,colored-line-number
         # &> /dev/null
     vars:
+      GOLANGCI_LINT_CFG: '{{.CONFIG_DIR}}/.golangci.yml'
       LINT_REPORT: '{{.BUILD}}/{{.LINT_REPORT}}'
     sources:
       - ./**/*.go

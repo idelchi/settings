@@ -2,7 +2,7 @@ version: '3'
 
 vars:
   # Externally passed configuration locations
-  CONFIG_DIR: '{{.CONFIG_DIR | default "."}}'
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
 
   CONFIG_PYPROJECT: '{{.CONFIG_DIR}}/pyproject.toml'
   CONFIG_PROSPECTOR: '{{.CONFIG_DIR}}/.prospector.yml'
