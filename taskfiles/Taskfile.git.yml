@@ -1,6 +1,11 @@
 version: '3'
 
 vars:
+  # Externally passed configuration locations
+  # Cannot be used to form any other variables here
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
+  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
+
   _:
     sh: |
       _=$(git config --global --unset-all safe.directory || true)

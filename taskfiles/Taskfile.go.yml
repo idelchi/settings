@@ -1,6 +1,11 @@
 version: '3'
 
 vars:
+  # Externally passed configuration locations
+  # Cannot be used to form any other variables here
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
+  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
+
   # Output folder names
   BUILD: '{{.BUILD | default ".build"}}'
   LINT_REPORT: '{{.LINT_REPORT | default "lint-report"}}'
@@ -14,10 +19,6 @@ vars:
   PACKAGES:
     sh: |
       echo $(go list ./...)
-
-  # Externally passed configuration locations
-  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
-  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
 
 tasks:
   # Utilities
