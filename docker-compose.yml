@@ -18,3 +18,5 @@ services:
     user: user
     volumes:
       - ${PWD}:/home/user
+    extra_hosts:
+      - host:host-gateway

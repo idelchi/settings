@@ -61,3 +61,7 @@ tasks:
       - task: git:info
       - task: format
       - task: lint
+
+  verify:
+    cmds:
+      - docker compose run go task

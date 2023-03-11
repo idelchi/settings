@@ -12,7 +12,8 @@ vars:
   PROJECT:
     sh: go list -m
   PACKAGES:
-    sh: go list ./... | tr '\n' ' '
+    sh: |
+      echo $(go list ./...)
 
   # Externally passed configuration locations
   SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
@@ -148,7 +149,7 @@ tasks:
           CXX: clang++
     status:
       - test {{OS}} != "linux"
-  
+
   # TODO: Add fuzzing target to the Taskfile for Go.
   fuzz:
     cmds:
