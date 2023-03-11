@@ -4,3 +4,17 @@ tasks:
   todo: grep --exclude-dir={.cache,.git,.task,.build} -rwo -n . --regexp 'TODO[:(].*'
 
   graph: yml2dot {{.CLI_ARGS}}.yml | dot -Tpng > {{.CLI_ARGS}}.png
+
+  # Copy over the project specific files
+  init:
+    cmds:
+      - |
+        echo "copying files"
+        cp -n -r .vscode ..
+        cp -n Taskfile.yml ..
+    preconditions:
+      # Check that the directories don't exist
+      - sh: test ! -d ../.vscode
+        msg: "cannot overwrite existing .vscode folder"
+      - sh: test ! -f ../Taskfile.yml
+        msg: "cannot overwrite existing Taskfile.yml file"
