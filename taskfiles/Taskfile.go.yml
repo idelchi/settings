@@ -148,6 +148,13 @@ tasks:
           CXX: clang++
     status:
       - test {{OS}} != "linux"
+  
+  # TODO: Add fuzzing target to the Taskfile for Go.
+  fuzz:
+    cmds:
+      - task: test
+        vars:
+          MODE: '--not--implemented'
 
   genprofile:
     desc: generate profiles for go project
