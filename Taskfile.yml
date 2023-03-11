@@ -1,23 +1,19 @@
 version: '3'
 
-vars:
-  SETTINGS_DIR: '.'
-
+# TODO: Change to vars and pass to each taskfile (?)
 env:
-  SETTINGS_DIR: '.'
-
-  CONFIG_DIR: '{{.SETTINGS_DIR}}/config'
-  SCRIPTS_DIR: '{{.SETTINGS_DIR}}/scripts'
+  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
+  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
 
 includes:
-  go: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.go.yml'
-  python: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.python.yml'
-  lint: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.lint.yml'
-  format: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.format.yml'
-  git: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.git.yml'
-  aux: '{{.SETTINGS_DIR}}/taskfiles/Taskfile.aux.yml'
+  go: 'taskfiles/Taskfile.go.yml'
+  python: 'taskfiles/Taskfile.python.yml'
+  lint: 'taskfiles/Taskfile.lint.yml'
+  format: 'taskfiles/Taskfile.format.yml'
+  git: 'taskfiles/Taskfile.git.yml'
+  aux: 'taskfiles/Taskfile.aux.yml'
 
-silent: false
+silent: true
 
 output: prefixed
 

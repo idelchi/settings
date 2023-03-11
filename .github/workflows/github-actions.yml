@@ -25,6 +25,3 @@ jobs:
 
       - run: docker build --tag idelchi/devenv:latest .
       - run: docker push idelchi/devenv:latest
-
-
-

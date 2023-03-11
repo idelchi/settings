@@ -15,6 +15,12 @@ tasks:
     preconditions:
       # Check that the directories don't exist
       - sh: test ! -d ../.vscode
-        msg: "cannot overwrite existing .vscode folder"
+        msg: 'cannot overwrite existing .vscode folder'
       - sh: test ! -f ../Taskfile.yml
-        msg: "cannot overwrite existing Taskfile.yml file"
+        msg: 'cannot overwrite existing Taskfile.yml file'
+
+  info:
+    cmds:
+      - |
+        echo "Config directory: {{.CONFIG_DIR}}"
+        echo "Scripts directory: {{.SCRIPTS_DIR}}"

@@ -19,7 +19,6 @@ davecgh
 davecgh
 devenv
 dockerfilelint
-DOCKERFILES
 dockerfiles
 errcheck
 funlen
@@ -64,6 +63,7 @@ paralleltest
 prantlf
 profilegen
 profileview
+rustup
 scspell
 segmentio
 stretchr
