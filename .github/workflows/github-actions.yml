@@ -10,33 +10,32 @@ env:
   IMAGE: idelchi/devenv
 
 jobs:
-  # info:
-  #   runs-on: [self-hosted, linux]
-  #   steps:
-  #     - run: echo "triggered by a ${{ github.event_name }} event."
-  #     - run: echo "running on a ${{ runner.os }}."
-  #     - run: echo "name of branch is ${{ github.ref }} and repository is ${{ github.repository }}."
-  #     - run: echo "${{ github.repository }} repository has been cloned to the runner."
-  #     - run: echo "workflow is now ready to test your code on the runner."
-  #     - run: echo "running as $(whoami)"
-
-  validate:
+  info:
     runs-on: [self-hosted, linux]
-    # needs: [info]
     steps:
+      - run: echo "triggered by a ${{ github.event_name }} event."
+      - run: echo "running on a ${{ runner.os }}."
+      - run: echo "name of branch is ${{ github.ref }} and repository is ${{ github.repository }}."
+      - run: echo "${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "workflow is now ready to test your code on the runner."
       - run: echo "running as $(whoami)"
-      - run: docker-compose build devenv
-      - run: ls
-      - run: docker compose run --rm devenv rm -rf Taskfile.yml
-      - run: ls
+
+  # validate:
+  #   # This needs to run on windows, because docker compose does not work inside of the docker container (it's probably mounting a volume from the host)
+  #   runs-on: [self-hosted, windows]
+  #   needs: [info]
+  #   steps:
+  #     - run: echo "running as $(whoami)"
+  #     - run: docker-compose build devenv
+      # - run: docker compose run --rm devenv task lint
 
   docker:
-    runs-on: [self-hosted, linux]
-    needs: [validate]
+    runs-on: [self-hosted, docker]
+    # needs: [validate]
     steps:
       - run: echo "running as $(whoami)"
 
-      - run: echo "Building image $IMAGE:$BRANCH""
+      - run: echo "Building image $IMAGE:$BRANCH"
 
       # - run: echo "Building image $IMAGE:$BRANCH"
 
