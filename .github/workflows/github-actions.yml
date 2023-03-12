@@ -1,9 +1,9 @@
 name: devenv
-on: [workflow_dispatch]
-  # push:
-  #   branches:
-  #     - dev
-  # workflow_dispatch:
+on: #[workflow_dispatch]
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
 
 env:
   BRANCH: ${{ github.head_ref || github.ref_name }}
@@ -27,7 +27,7 @@ jobs:
     # env:
     #   PWD: .
     steps:
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - run: ls
 
       # - run: echo "running as $(whoami)"
