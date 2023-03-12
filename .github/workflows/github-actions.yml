@@ -58,8 +58,8 @@ jobs:
         with:
           push: true
           tags: ${{ env.IMAGE }}:dev
-          cache-to: type=inline
-          # cache-to: type=registry,ref=${{ env.IMAGE }}:dev:buildcache,mode=max
+          # cache-to: type=inline
+          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache,mode=max
 
   docker:
     runs-on: ubuntu-22.04
