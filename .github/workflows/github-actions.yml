@@ -24,19 +24,21 @@ jobs:
     runs-on: [self-hosted, linux]
     needs: [info]
     steps:
+      - run: echo "running as $(whoami)"
+
       - run: ls
       - run: printenv
       - run: docker-compose build devenv
-      - run: PWD=. docker-compose run --rm devenv task lint
+      - run: echo $PWD
+      - run: docker compose run --rm devenv ls
+        # env:
+            # PWD: .
 
   docker:
     runs-on: [self-hosted, linux]
     needs: [validate]
     steps:
       - run: echo "running as $(whoami)"
-
-      - name: Check out repository code
-        uses: actions/checkout@v3
 
       - name: Build image
         run: docker build --tag idelchi/devenv:$BRANCH .
