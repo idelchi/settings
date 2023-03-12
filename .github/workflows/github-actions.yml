@@ -25,14 +25,10 @@ jobs:
     needs: [info]
     steps:
       - run: echo "running as $(whoami)"
-
-      - run: ls
-      - run: printenv
       - run: docker-compose build devenv
-      - run: echo $PWD
-      - run: pwd
-      - run: cat docker-compose.yml
-      - run: docker compose run --rm devenv ls
+      - run: ls
+      - run: docker compose run --rm devenv rm -rf Taskfile.yml
+      - run: ls
 
   docker:
     runs-on: [self-hosted, linux]
@@ -40,7 +36,7 @@ jobs:
     steps:
       - run: echo "running as $(whoami)"
 
-      - run: echo "Building image '${{ secrets.DOCKER_USERNAME }}:{{ github.workflow }}'"
+      - run: echo "Building image  {{ github.action }}"
 
       - run: echo "Building image $IMAGE:$BRANCH"
 
