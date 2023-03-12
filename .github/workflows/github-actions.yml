@@ -25,20 +25,20 @@ jobs:
     runs-on: [self-hosted, windows]
     needs: [info]
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - run: echo "running as $(whoami)"
 
       - run: docker-compose build devenv
       - run: docker compose run --rm devenv task lint
+        env:
+          PWD: .
 
   docker:
     runs-on: [self-hosted, docker]
     needs: [validate]
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - run: echo "running as $(whoami)"
 
