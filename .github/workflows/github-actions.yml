@@ -43,10 +43,9 @@ jobs:
           load: true
           tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
-          # cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
       # Run the minimum required tests to validate the image
-      - run: docker compose run --rm devenv bash -c "go mod init example.com && task lint:all"
+      - run: docker compose run --rm devenv task lint:all
 
       # Push the image to Docker Hub
       # Use the cache from the previous step
@@ -55,12 +54,8 @@ jobs:
         with:
           push: true
           tags: ${{ env.IMAGE }}:dev
-          # cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=inline
 
-      # Remove the cache (?)
-      - name: Remove buildx cache
-        run: rm -rf /tmp/.buildx-cache
 
   docker:
     runs-on: ubuntu-22.04
