@@ -25,7 +25,11 @@ jobs:
     runs-on: [self-hosted, windows]
     needs: [info]
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
       - run: echo "running as $(whoami)"
+
       - run: docker-compose build devenv
       - run: docker compose run --rm devenv task lint
 
@@ -33,6 +37,11 @@ jobs:
     runs-on: [self-hosted, docker]
     needs: [validate]
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "running as $(whoami)"
+
       - run: echo "Building image $IMAGE_TAG"
       - name: Build image
         run: docker build --tag $IMAGE:$BRANCH .
