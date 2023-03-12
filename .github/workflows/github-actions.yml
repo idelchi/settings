@@ -32,7 +32,7 @@ jobs:
       - run: echo "running as $(whoami)"
 
       - run: docker-compose build devenv
-      - run: docker compose run --rm devenv go mod init $IMAGE
+      - run: docker compose run --rm devenv go mod init idelchi/devenv
       - run: docker compose run --rm devenv task lint:all
 
   docker:
