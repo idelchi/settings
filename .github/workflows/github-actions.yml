@@ -1,9 +1,9 @@
 name: devenv
-on: # [push, workflow_dispatch]
-  push:
-    branches:
-      - dev
-  workflow_dispatch:
+on: [workflow_dispatch]
+  # push:
+  #   branches:
+  #     - dev
+  # workflow_dispatch:
 
 env:
   BRANCH: ${{ github.head_ref || github.ref_name }}
