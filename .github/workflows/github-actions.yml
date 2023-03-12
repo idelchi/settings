@@ -44,6 +44,7 @@ jobs:
 
       - run: docker compose run --rm devenv whoami
       - run: docker compose run --rm devenv ls -al
+      - run: docker compose run --rm devenv touch file
       - run: docker compose run --rm devenv go mod init example.com
       - run: docker compose run --rm devenv task lint:all
 
