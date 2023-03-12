@@ -63,12 +63,11 @@ jobs:
 
   go:
     runs-on: ubuntu-22.04
-    # container: golang:1.20.2
+    container: golang:1.20.2
     steps:
       - uses: actions/checkout@v3
 
       - run: go version
-      - run: go list ./...
 
   docker:
     runs-on: ubuntu-22.04
