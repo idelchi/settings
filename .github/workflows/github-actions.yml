@@ -7,7 +7,7 @@ on: # [push, workflow_dispatch]
 
 env:
   BRANCH: ${{ github.head_ref || github.ref_name }}
-  IMAGE: idelchi/dev
+  IMAGE: idelchi/devenv
 
 jobs:
   info:
@@ -34,7 +34,7 @@ jobs:
       - run: echo "running as $(whoami)"
 
       - run: docker-compose build devenv
-      - run: docker compose run --rm devenv go mod init $env:IMAGE
+      - run: docker compose run --rm devenv go mod init example.com
       - run: docker compose run --rm devenv task lint:all
 
   docker:
