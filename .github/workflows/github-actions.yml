@@ -47,7 +47,6 @@ jobs:
 
       # Run the minimum required tests to validate the image
       - run: |
-          docker tag ${{ env.IMAGE }}:dev ${{ env.IMAGE }}:local
           docker compose build
           docker compose run --rm devenv task lint:all
 
