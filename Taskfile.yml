@@ -13,14 +13,6 @@ silent: true
 output: prefixed
 
 tasks:
-  info:
-    cmds:
-      - |
-        echo "Root directory: '{{.ROOT_DIR}}'"
-        echo "User working directory: '{{.USER_WORKING_DIR}}'"
-        echo "Config directory: {{.PARENT_CONFIG_DIR}}"
-        echo "Scripts directory: {{.PARENT_SCRIPTS_DIR}}"
-
   clean:
     - task: go:clean
     - rm -rf .task
