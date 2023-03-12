@@ -35,24 +35,30 @@ jobs:
           username: ${{ env.OWNER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Build the Docker image
+      # Load it into the local Docker daemon, and make the cache available to the next step
       - name: Build and export to Docker
         uses: docker/build-push-action@v4
         with:
           load: true
           tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          # cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
+      # Run the minimum required tests to validate the image
       - run: docker compose run --rm devenv bash -c "go mod init example.com && task lint:all"
 
+      # Push the image to Docker Hub
+      # Use the cache from the previous step
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.IMAGE }}:dev
-          cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=inline
 
+      # Remove the cache (?)
       - name: Remove buildx cache
         run: rm -rf /tmp/.buildx-cache
 
