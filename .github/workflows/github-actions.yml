@@ -7,7 +7,7 @@ on: # [push, workflow_dispatch]
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-  IMAGE: idelchi/devenv
+  IMAGE: idelchi/devenv:$BRANCH_NAME
 
 jobs:
   info:
@@ -33,12 +33,8 @@ jobs:
     runs-on: [self-hosted, docker]
     # needs: [validate]
     steps:
-      - run: echo "running as $(whoami)"
-
-      - run: echo "Building image $IMAGE:$BRANCH"
-
-      # - run: echo "Building image $IMAGE:$BRANCH"
-
+      - run: echo "Building image $IMAGE"
+      # - run: echo "Building image $IMAGE:$BRANCH_NAME"
       # - name: Build image
       #   run: docker build --tag $IMAGE:$BRANCH .
 
