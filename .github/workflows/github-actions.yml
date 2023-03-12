@@ -1,9 +1,5 @@
 name: devenv
-on: #[workflow_dispatch]
-  push:
-    branches:
-      - dev
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 env:
   BRANCH: ${{ github.head_ref || github.ref_name }}
@@ -46,8 +42,19 @@ jobs:
           cache-from: type=registry,ref=idelchi/devenv:dev
           cache-to: type=inline
 
+      - run: docker compose run --rm devenv whoami
+      - run: docker compose run --rm devenv ls -al
       - run: docker compose run --rm devenv go mod init example.com
       - run: docker compose run --rm devenv task lint:all
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ env.IMAGE }}:dev
+          cache-from: type=registry,ref=idelchi/devenv:dev
+          cache-to: type=inline
+
 
   docker:
     runs-on: ubuntu-22.04
@@ -75,3 +82,4 @@ jobs:
 # https://docs.docker.com/build/ci/github-actions/cache/
 # https://github.com/marketplace/actions/build-and-push-docker-images#examples
 # https://docs.docker.com/build/ci/github-actions/
+# https://docs.docker.com/engine/reference/commandline/buildx_build/#output
