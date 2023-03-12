@@ -42,7 +42,7 @@ jobs:
         with:
           load: true
           tags: ${{ env.IMAGE }}:dev
-          cache-from: type=registry,ref=${{ env.IMAGE }}:dev
+          # cache-from: type=registry,ref=${{ env.IMAGE }}:dev
 
       # Run the minimum required tests to validate the image
       - run: docker compose run --rm devenv task lint:all
