@@ -24,6 +24,8 @@ jobs:
     # This needs to run on windows, because docker compose does not work inside of the docker container (it's probably mounting a volume from the host)
     runs-on: [self-hosted, windows]
     needs: [info]
+    env:
+      PWD: .
     steps:
       - uses: actions/checkout@v3
 
@@ -31,8 +33,7 @@ jobs:
 
       - run: docker-compose build devenv
       - run: docker compose run --rm devenv task lint
-        env:
-          PWD: .
+
 
   docker:
     runs-on: [self-hosted, docker]
