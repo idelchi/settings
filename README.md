@@ -27,11 +27,11 @@ To display available commands along with their descriptions, run
   - [vet](https://pkg.go.dev/cmd/vet)
   - [golangci-lint](https://github.com/golangci/golangci-lint)
 - Python
-  - [black]()
-  - [flake8]()
-  - [isort]()
-  - [prospector]()
-  - [pyright]()
+  - [black](tbd)
+  - [flake8](tbd)
+  - [isort](tbd)
+  - [prospector](tbd)
+  - [pyright](tbd)
 - Groovy
   - [npm-groovy-lint](https://github.com/nvuillam/npm-groovy-lint)
   - [jflint](https://github.com/miyajan/jflint)
