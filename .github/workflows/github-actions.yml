@@ -18,10 +18,13 @@ jobs:
       - run: echo "${{ github.repository }} repository has been cloned to the runner."
       - run: echo "workflow is now ready to test your code on the runner."
       - run: echo "running as $(whoami)"
+      - run: ls
 
   validate:
     runs-on: [self-hosted, linux]
     steps:
+      - run: ls
+      - run: printenv
       - run: docker-compose build devenv
       - run: docker-compose run --rm devenv task lint
 
