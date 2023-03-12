@@ -32,6 +32,7 @@ jobs:
       - run: echo "running as $(whoami)"
 
       - run: docker-compose build devenv
+      - run: docker compose run --rm devenv go mod init $IMAGE
       - run: docker compose run --rm devenv task lint:all
 
   docker:
@@ -43,7 +44,7 @@ jobs:
 
       - run: echo "running as $(whoami)"
 
-      - run: echo "Building image $IMAGE_TAG"
+      - run: echo "Building image $IMAGE:$BRANCH"
       - name: Build image
         run: docker build --tag $IMAGE:$BRANCH .
 
