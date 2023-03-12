@@ -36,25 +36,29 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Build the Docker image
-      # Load it into the local Docker daemon, and make the cache available to the next step
+      # Use inline cache to speed up the build
+      # Load it into the local Docker daemon
       - name: Build and export to Docker
         uses: docker/build-push-action@v4
         with:
           load: true
           tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
+          # cache-from: type=registry,ref=${{ env.IMAGE }}:buildcache
 
       # Run the minimum required tests to validate the image
       - run: docker compose run --rm devenv task lint:all
 
-      # Push the image to Docker Hub
-      # Use the cache from the previous step
+      # Build the Docker image and Push it to Docker Hub
+      # The cache should still be available from the previous step
+      # Push the inline cache to Docker Hub
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.IMAGE }}:dev
           cache-to: type=inline
+          # cache-to: type=registry,ref=${{ env.IMAGE }}:dev:buildcache,mode=max
 
   docker:
     runs-on: ubuntu-22.04
@@ -62,6 +66,9 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
