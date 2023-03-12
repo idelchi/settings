@@ -6,8 +6,8 @@ on: # [push, workflow_dispatch]
   workflow_dispatch:
 
 env:
-  BRANCH: ${{ github.ref }}
-  IMAGE: ${{ secrets.DOCKER_USERNAME }}/{{ github.workflow }}
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  IMAGE: ${{ secrets.DOCKER_USERNAME }}/{{ github.action }}
 
 jobs:
   info:
@@ -55,3 +55,6 @@ jobs:
 
       - name: Push image
         run: docker push $IMAGE:$BRANCH
+
+
+# https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
