@@ -21,9 +21,9 @@ jobs:
           echo github.ref_name: ${{ github.ref_name }}
           echo whoami: $(whoami)
 
-  validate:
+  test:
     runs-on: ubuntu-22.04
-    # needs: [info]
+    needs: [info]
     steps:
       - uses: actions/checkout@v3
 
@@ -60,7 +60,7 @@ jobs:
           tags: ${{ env.IMAGE }}:dev
           cache-to: type=inline
 
-  docker:
+  push:
     runs-on: ubuntu-22.04
     needs: [validate]
     if: github.ref == 'refs/heads/master'
