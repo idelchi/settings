@@ -2,7 +2,6 @@
 
 DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-# shellcheck source=./settings/scripts/go/common.sh
 source "${DIR}/common.sh"
 
 usage() {

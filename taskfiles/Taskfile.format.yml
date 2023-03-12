@@ -71,9 +71,9 @@ tasks:
       - shfmt -i 2 -ci -s -w {{.SCRIPTS_DIR}}/**/*.sh
       - |
         for check in {{.CHECKS}}; do
-          shellcheck --shell=bash --enable=$check --severity=style -f diff {{.SCRIPTS_DIR}}/**/*.sh | patch -p1 > /dev/null
+          shellcheck --shell=bash --enable=$check --severity=style --source-path={{.SCRIPTS_DIR}}/go -f diff {{.SCRIPTS_DIR}}/**/*.sh | patch -p1 > /dev/null
         done
-      - shellcheck --shell=bash --enable=all --severity=style -f diff {{.SCRIPTS_DIR}}/**/*.sh | patch -p1 > /dev/null
+      - shellcheck --shell=bash --enable=all --severity=style --source-path={{.SCRIPTS_DIR}}/go -f diff {{.SCRIPTS_DIR}}/**/*.sh | patch -p1 > /dev/null
     vars:
       CHECKS: quote-safe-variables require-double-brackets require-variable-braces
     sources:

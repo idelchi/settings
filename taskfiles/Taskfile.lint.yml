@@ -87,7 +87,7 @@ tasks:
   shell:
     cmds:
       - shfmt -i 2 -ci -d -l -s {{.SCRIPTS_DIR}}/**/*.sh
-      - shellcheck --shell=bash --enable=all --severity=style {{.SCRIPTS_DIR}}/**/*.sh
+      - shellcheck --shell=bash --enable=all --severity=style --source-path={{.SCRIPTS_DIR}}/go {{.SCRIPTS_DIR}}/**/*.sh
     sources:
       - ./{{.SCRIPTS_DIR}}/**/*.sh
     silent: true

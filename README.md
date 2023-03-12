@@ -10,7 +10,7 @@ Include as a submodule and initialize your main project's Taskfile & vscode sett
 
 or write your own `Taskfile.yml` using the tasks defined in `settings/taskfiles`
 
-### Running the code
+## Running the code
 
 A [Taskfile][taskfile-file] is used to summarize and manage the different build system commands.
 
@@ -20,7 +20,7 @@ To display available commands along with their descriptions, run
 
     task --list
 
-### Tools
+## Tools
 
 - Go
   - [gofmt](https://pkg.go.dev/cmd/gofmt)
@@ -55,7 +55,7 @@ To display available commands along with their descriptions, run
 - Copy-Paste
   - [jscpd](https://github.com/kucherenko/jscpd)
 
-### Using Docker
+## Using Docker
 
 The accompanying docker image may be used to run native runs with full support of all commands listed in the _taskfile_.
 
