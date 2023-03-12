@@ -7,7 +7,7 @@ on: # [push, workflow_dispatch]
 
 env:
   BRANCH: ${{ github.head_ref || github.ref_name }}
-  IMAGE: idelchi/devenv
+  IMAGE: idelchi/dev
 
 jobs:
   info:
