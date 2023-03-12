@@ -39,14 +39,10 @@ jobs:
         with:
           load: true
           tags: ${{ env.IMAGE }}:dev
-          cache-from: type=registry,ref=idelchi/devenv:dev
+          cache-from: type=registry,ref=${{ env.IMAGE }}:dev
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
-      - run: docker compose run --rm devenv whoami
-      - run: docker compose run --rm devenv ls -al
-      - run: docker compose run --rm devenv touch file
-      - run: docker compose run --rm devenv go mod init example.com
-      - run: docker compose run --rm devenv task lint:all
+      - run: docker compose run --rm devenv bash -c "go mod init example.com && task lint:all"
 
       - name: Build and push
         uses: docker/build-push-action@v4
@@ -74,8 +70,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: idelchi/devenv:latest
-          cache-from: type=registry,ref=idelchi/devenv:dev
+          tags: ${{ env.IMAGE }}:latest
+          cache-from: type=registry,ref=${{ env.IMAGE }}:dev
 
 # https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 # https://docs.github.com/en/actions/learn-github-actions/variables
