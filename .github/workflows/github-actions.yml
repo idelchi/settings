@@ -26,8 +26,6 @@ jobs:
   validate:
     runs-on: ubuntu-22.04
     # needs: [info]
-    env:
-      PWD: .
     steps:
       - uses: actions/checkout@v3
 
@@ -44,12 +42,11 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           load: true
-          tags: ${{ env.IMAGE }}:latest
+          push: true
+          tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=idelchi/devenv:dev
           cache-to: type=inline
 
-      - run: docker images
-      # - run: docker compose build devenv
       - run: docker compose run --rm devenv go mod init example.com
       - run: docker compose run --rm devenv task lint:all
 
