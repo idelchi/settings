@@ -45,8 +45,17 @@ jobs:
         with:
           load: true
           tags: ${{ env.IMAGE }}:test
-          cache-from: type=registry,ref=idelchi/devenv:buildcache
-          cache-to: type=registry,ref=idelchi/devenv,mode=max
+          cache-from: |
+            type=registry
+            ref=idelchi/devenv:buildcache
+          cache-to: |
+            type=registry
+            ref=idelchi/devenv:buildcache
+            mode=max
+
+          # cache-from: type=registry,ref=idelchi/devenv:buildcache
+          # cache-to: type=registry,ref=idelchi/devenv:buildcache,mode=max
+
       # - run: docker-compose build devenv
       # - run: docker compose run --rm devenv go mod init example.com
       # - run: docker compose run --rm devenv task lint:all
