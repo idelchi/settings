@@ -90,7 +90,6 @@ tasks:
       - shellcheck --shell=bash --enable=all --severity=style --source-path={{.SCRIPTS_DIR}}/go {{.SCRIPTS_DIR}}/**/*.sh
     sources:
       - ./{{.SCRIPTS_DIR}}/**/*.sh
-    silent: true
     preconditions:
       - sh: shfmt -i 2 -ci -d -l -s {{.SCRIPTS_DIR}}/**/*.sh
         msg: 'shell/bash files have not been formatted with shfmt'
