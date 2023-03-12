@@ -61,7 +61,7 @@ jobs:
       # - run: docker compose run --rm devenv task lint:all
 
 
-  validate:
+  go:
     runs-on: ubuntu-22.04
     # container: golang:1.20.2
     steps:
