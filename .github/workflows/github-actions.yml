@@ -44,14 +44,14 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           load: true
-          tags: ${{ env.IMAGE }}:test
+          tags: ${{ env.IMAGE }}:latest
           cache-from: type=registry,ref=idelchi/devenv:dev
           cache-to: type=inline
 
       - run: docker images
-      - run: docker-compose build devenv
-      # - run: docker compose run --rm devenv go mod init example.com
-      # - run: docker compose run --rm devenv task lint:all
+      # - run: docker compose build devenv
+      - run: docker compose run --rm devenv go mod init example.com
+      - run: docker compose run --rm devenv task lint:all
 
   docker:
     runs-on: ubuntu-22.04
