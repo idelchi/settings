@@ -121,8 +121,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 #     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # # Create CI User (Debian/Ubuntu)
-RUN groupadd -r -g 1001 user && \
-    useradd -r -u 1001 -g 1001 -m -c "user account" -d /home/user -s /bin/bash user
+RUN groupadd -r -g 1000 user && \
+    useradd -r -u 1000 -g 1000 -m -c "user account" -d /home/user -s /bin/bash user
 
 # # Python tooling
 # # hadolint ignore=SC2102
