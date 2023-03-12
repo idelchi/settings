@@ -73,6 +73,7 @@ jobs:
           cache-to: |
             type=registry
             ref=idelchi/devenv:buildcache
+            mode=max
 
 # https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 # https://docs.github.com/en/actions/learn-github-actions/variables
