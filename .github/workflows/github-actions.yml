@@ -32,7 +32,7 @@ jobs:
       - run: echo "running as $(whoami)"
 
       - run: docker-compose build devenv
-      - run: docker compose run --rm devenv task lint
+      - run: docker compose run --rm devenv task lint:all
 
   docker:
     runs-on: [self-hosted, docker]
