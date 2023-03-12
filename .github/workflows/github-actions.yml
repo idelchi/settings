@@ -33,7 +33,7 @@ jobs:
 
       - run: docker-compose build devenv
       - run: docker compose run --rm devenv go mod init $env:IMAGE
-      - run: docker compose run --rm devenv task lint:all
+      - run: docker compose run --rm devenv task lint
 
   docker:
     runs-on: [self-hosted, docker]
@@ -57,3 +57,4 @@ jobs:
       - name: Push image
         run: docker push $IMAGE:$BRANCH
 # https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
+# https://docs.github.com/en/actions/learn-github-actions/variables
