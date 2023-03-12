@@ -42,7 +42,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           load: true
-          push: true
           tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=idelchi/devenv:dev
           cache-to: type=inline
