@@ -46,8 +46,10 @@ jobs:
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
 
       # Run the minimum required tests to validate the image
-      - run: docker compose build
-      - run: docker compose run --rm devenv task lint:all
+      - run: |
+          docker tag ${{ env.IMAGE }}:dev ${{ env.IMAGE }}:local
+          docker compose build
+          docker compose run --rm devenv task lint:all
 
       # Build the Docker image and Push it to Docker Hub
       # The cache should still be available from the previous step
