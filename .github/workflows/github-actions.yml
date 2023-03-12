@@ -67,12 +67,12 @@ jobs:
         with:
           push: true
           tags: idelchi/devenv:latest
-          cache-from:
-            - type=registry
-            - ref=idelchi/devenv:buildcache
-          cache-to:
-            - type=registry
-            - ref=idelchi/devenv:buildcache
+          cache-from: |
+            type=registry
+            ref=idelchi/devenv:buildcache
+          cache-to: |
+            type=registry
+            ref=idelchi/devenv:buildcache
 
 # https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 # https://docs.github.com/en/actions/learn-github-actions/variables
