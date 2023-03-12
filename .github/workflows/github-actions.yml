@@ -22,11 +22,12 @@ jobs:
 
   validate:
     runs-on: [self-hosted, linux]
+    needs: [info]
     steps:
       - run: ls
       - run: printenv
       - run: docker-compose build devenv
-      - run: docker-compose run --rm devenv task lint
+      - run: PWD=. docker-compose run --rm devenv task lint
 
   docker:
     runs-on: [self-hosted, linux]
