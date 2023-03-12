@@ -44,8 +44,7 @@ jobs:
           load: true
           tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
-          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache,mode=max
-          # cache-from: type=registry,ref=${{ env.IMAGE }}:buildcache
+          cache-to: type=inline
 
       # Run the minimum required tests to validate the image
       - run: docker compose run --rm devenv task lint:all
@@ -59,7 +58,6 @@ jobs:
           push: true
           tags: ${{ env.IMAGE }}:dev
           # cache-to: type=inline
-          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache,mode=max
 
   docker:
     runs-on: ubuntu-22.04
