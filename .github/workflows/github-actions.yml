@@ -45,8 +45,8 @@ jobs:
         with:
           load: true
           tags: ${{ env.IMAGE }}:test
-          cache-from: type=registry,ref=idelchi/devenv:buildcache
-          cache-to: type=registry,ref=idelchi/devenv:buildcache,mode=max
+          cache-from: type=registry,ref=idelchi/devenv:dev
+          cache-to: type=inline
 
       - run: docker images
       - run: docker-compose build devenv
@@ -71,8 +71,7 @@ jobs:
         with:
           push: true
           tags: idelchi/devenv:latest
-          cache-from: type=registry,ref=idelchi/devenv:buildcache
-          cache-to: type=registry,ref=idelchi/devenv:buildcache,mode=max
+          cache-from: type=registry,ref=idelchi/devenv:dev
 
 # https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 # https://docs.github.com/en/actions/learn-github-actions/variables
