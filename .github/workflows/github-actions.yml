@@ -7,7 +7,7 @@ on: # [push, workflow_dispatch]
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-  # IMAGE: ${{ secrets.DOCKER_USERNAME }}:{{ github.action }}
+  IMAGE: idelchi/devenv
 
 jobs:
   # info:
@@ -36,8 +36,7 @@ jobs:
     steps:
       - run: echo "running as $(whoami)"
 
-      - run: echo "Building image  {{ github.action }}"
-      - run: echo "Building image  $GITHUB_ACTION"
+      - run: echo "Building image $IMAGE:$BRANCH""
 
       # - run: echo "Building image $IMAGE:$BRANCH"
 
