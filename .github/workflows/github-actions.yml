@@ -44,9 +44,9 @@ jobs:
           load: true
           tags: ${{ env.IMAGE }}:dev
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
-          cache-to: type=inline
 
       # Run the minimum required tests to validate the image
+      - run: docker compose build
       - run: docker compose run --rm devenv task lint:all
 
       # Build the Docker image and Push it to Docker Hub
@@ -57,7 +57,7 @@ jobs:
         with:
           push: true
           tags: ${{ env.IMAGE }}:dev
-          # cache-to: type=inline
+          cache-to: type=inline
 
   docker:
     runs-on: ubuntu-22.04
