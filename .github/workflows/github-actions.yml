@@ -2,7 +2,7 @@ name: devenv
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   info:
