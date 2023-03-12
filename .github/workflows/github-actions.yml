@@ -60,6 +60,16 @@ jobs:
       # - run: docker compose run --rm devenv go mod init example.com
       # - run: docker compose run --rm devenv task lint:all
 
+
+  validate:
+    runs-on: ubuntu-22.04
+    # container: golang:1.20.2
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: go version
+      - run: go list ./...
+
   docker:
     runs-on: ubuntu-22.04
     needs: [validate]
@@ -91,3 +101,4 @@ jobs:
 # https://stackoverflow.com/questions/63318776/how-to-cache-a-docker-image-from-a-github-action
 # https://docs.docker.com/build/ci/github-actions/cache/
 # https://github.com/marketplace/actions/build-and-push-docker-images#examples
+# https://docs.docker.com/build/ci/github-actions/
