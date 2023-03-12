@@ -30,9 +30,9 @@ jobs:
       - run: printenv
       - run: docker-compose build devenv
       - run: echo $PWD
+      - run: pwd
+      - run: cat docker-compose.yml
       - run: docker compose run --rm devenv ls
-        # env:
-            # PWD: .
 
   docker:
     runs-on: [self-hosted, linux]
