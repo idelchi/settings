@@ -45,10 +45,10 @@ jobs:
         with:
           load: true
           tags: ${{ env.IMAGE }}:test
-          cache-from: |
+          cache-from: >
             type=registry,
             ref=idelchi/devenv:buildcache
-          cache-to: |
+          cache-to: >
             type=registry,
             ref=idelchi/devenv:buildcache,
             mode=max
