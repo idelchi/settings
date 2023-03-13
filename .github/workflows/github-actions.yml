@@ -82,10 +82,4 @@ jobs:
           push: true
           tags: ${{ env.IMAGE }}:latest
           cache-from: type=registry,ref=${{ env.IMAGE }}:dev
-# https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
-# https://docs.github.com/en/actions/learn-github-actions/variables
-# https://stackoverflow.com/questions/63318776/how-to-cache-a-docker-image-from-a-github-action
-# https://docs.docker.com/build/ci/github-actions/cache/
-# https://github.com/marketplace/actions/build-and-push-docker-images#examples
-# https://docs.docker.com/build/ci/github-actions/
-# https://docs.docker.com/engine/reference/commandline/buildx_build/#output
+

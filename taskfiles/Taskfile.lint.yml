@@ -77,7 +77,7 @@ tasks:
 
   md:
     cmds:
-      - markdownlint --disable MD013 --ignore-path={{.IGNORE}} "**/*.md"
+      - markdownlint --disable=MD013 --ignore-path={{.IGNORE}} "**/*.md"
       - prettier --ignore-path={{.IGNORE}} --check "**/*.md"
     vars:
       IGNORE: '{{.CONFIG_DIR}}/.ignore'
