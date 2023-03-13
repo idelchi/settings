@@ -38,7 +38,7 @@ tasks:
   json:
     cmds:
       - jsonlint --mode=cjson --pretty-print --quiet --in-place --indent "    " .
-      # - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.json"
+      - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.json"
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
       IGNORE: '{{.CONFIG_DIR}}/.ignore'
