@@ -5,49 +5,12 @@ includes:
   git: 'taskfiles/Taskfile.git.yml'
   lint: 'taskfiles/Taskfile.lint.yml'
   format: 'taskfiles/Taskfile.format.yml'
-  python: 'taskfiles/Taskfile.python.yml'
-  go: 'taskfiles/Taskfile.go.yml'
 
 silent: true
 
 output: prefixed
 
 tasks:
-  clean:
-    - task: go:clean
-    - rm -rf .task
-
-  info:
-    cmds:
-      - task: git:info
-
-  format:
-    - task: format:all
-    - task: go:format
-
-  lint:
-    deps:
-      - lint:all
-      - go:lint
-
-  build:
-    - task: go:build
-    - task: go:release
-
-  test:
-    - task: go:quality
-
-  # ---------
-  all:
-    desc: run all available tasks
-    cmds:
-      - task: git:info
-      - task: clean
-      - task: format
-      - task: lint
-      - task: build
-      - task: test
-
   # default 'format & lint' target
   # ---------
   default:

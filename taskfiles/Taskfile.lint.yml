@@ -4,12 +4,15 @@ vars:
   CONFIG_DIR: './config'
   SCRIPTS_DIR: './scripts'
 
+  # Output folder names
+  BUILD_DIR: '{{.BUILD_DIR | default ".build"}}'
+
 tasks:
   # TODO: Write this as a Go-tool!
   ws: |
     files=$(find . -type f \
     ! -path "*/.git/*" \
-    ! -path "*/.build/*" \
+    ! -path "*/{{.BUILD_DIR}}/*" \
     ! -path "*/.task/*" \
     ! -path "*/.vscode-server/*" \
     -exec egrep -Hno " +$" {} \;)
@@ -124,7 +127,7 @@ tasks:
       - ./build/cpd/**/*
 
   # ---------
-  all:
+  default:
     deps:
       - task: ws
       - task: docker

@@ -7,7 +7,7 @@ services:
     image: idelchi/devenv:local
     container_name: devenv
     hostname: devenv
-    build:
+    BUILD_DIR:
       context: .
     ports:
       # <host:container>
