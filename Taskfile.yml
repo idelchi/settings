@@ -17,6 +17,10 @@ tasks:
     - task: go:clean
     - rm -rf .task
 
+  info:
+    cmds:
+      - task: git:info
+
   format:
     - task: format:all
     - task: go:format
