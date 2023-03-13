@@ -29,6 +29,8 @@ tasks:
         ignore_error: true
       - cmd: git push
         ignore_error: true
+    vars:
+      MESSAGE: '{{.CLI_ARGS | default "[skip ci] Development commit"}}'
 
   default:
     cmds:
