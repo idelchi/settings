@@ -1,10 +1,8 @@
 version: '3'
 
 vars:
-  # Externally passed configuration locations
-  # Cannot be used to form any other variables here
-  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
-  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
+  CONFIG_DIR: './config'
+  SCRIPTS_DIR: './scripts'
 
 tasks:
   todo: grep --exclude-dir={.cache,.git,.task,.build} -rwo -n . --regexp 'TODO[:(].*'
@@ -28,7 +26,5 @@ tasks:
   info:
     cmds:
       - |
-        echo "Root directory: '{{.ROOT_DIR}}'"
-        echo "User working directory: '{{.USER_WORKING_DIR}}'"
         echo "Config directory: {{.CONFIG_DIR}}"
         echo "Scripts directory: {{.SCRIPTS_DIR}}"

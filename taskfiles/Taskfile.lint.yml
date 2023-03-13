@@ -1,19 +1,17 @@
 version: '3'
 
 vars:
-  # Externally passed configuration locations
-  # Cannot be used to form any other variables here
-  CONFIG_DIR: '{{.CONFIG_DIR | default "./config"}}'
-  SCRIPTS_DIR: '{{.SCRIPTS_DIR | default "./scripts"}}'
+  CONFIG_DIR: './config'
+  SCRIPTS_DIR: './scripts'
 
 tasks:
   # TODO: Write this as a Go-tool!
   ws: |
     files=$(find . -type f \
     ! -path "*/.git/*" \
-    ! -path "./.build/*" \
-    ! -path "./.task/*" \
-    ! -path "./.vscode-server/*" \
+    ! -path "*/.build/*" \
+    ! -path "*/.task/*" \
+    ! -path "*/.vscode-server/*" \
     -exec egrep -Hno " +$" {} \;)
 
     if [ -z "$files" ]; then
