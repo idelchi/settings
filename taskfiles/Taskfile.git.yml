@@ -25,7 +25,7 @@ tasks:
   push:
     cmds:
       - git add .
-      - cmd: git commit -m "{{.MESSAGE}}"
+      - cmd: git commit -am "{{.MESSAGE}}"
         ignore_error: true
       - cmd: git push
         ignore_error: true
