@@ -10,9 +10,9 @@ tasks:
   ws: |
     files=$(find . -type f \
     ! -path "*/.git/*" \
-    ! -path "./.build/*" \
-    ! -path "./.task/*" \
-    ! -path "./.vscode-server/*" \
+    ! -path "*/.build/*" \
+    ! -path "*/.task/*" \
+    ! -path "*/.vscode-server/*" \
     -exec egrep -l " +$" {} \;)
 
     if [ -n "$files" ]; then
@@ -38,7 +38,7 @@ tasks:
   json:
     cmds:
       - jsonlint --mode=cjson --pretty-print --quiet --in-place --indent "    " .
-      - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.json"
+      # - prettier --config={{.CONFIG}} --loglevel=silent --ignore-path={{.IGNORE}} --write "**/*.json"
     vars:
       CONFIG: '{{.CONFIG_DIR}}/.prettierrc.yml'
       IGNORE: '{{.CONFIG_DIR}}/.ignore'

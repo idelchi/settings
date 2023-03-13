@@ -1,2 +1,2 @@
 git add .
-git commit -m "Development commit" && git push
+git commit -m "[skip ci] Development commit" && git push
