@@ -25,12 +25,12 @@ tasks:
   push:
     cmds:
       - git add .
-      - cmd: git commit -m "[skip ci] Development commit"
+      - cmd: git commit -m "{{.MESSAGE}}"
         ignore_error: true
       - cmd: git push
         ignore_error: true
     vars:
-      MESSAGE: '{{.CLI_ARGS | default "[skip ci] Development commit"}}'
+      MESSAGE: '[skip ci] Development commit'
 
   default:
     cmds:
