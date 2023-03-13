@@ -24,18 +24,16 @@ tasks:
       done
     fi
 
-  docker:
-    cmds:
-      - |
-        dockerfiles=$(find . -name "Dockerfile")
-        for dockerfile in $dockerfiles
-        do
-          tfile="$(mktemp /tmp/Dockerfile.XXXXX)"
-          echo "$(cat $dockerfile)" > $tfile
-          dockerfile-utils format --spaces 4 $tfile > $dockerfile
-          rm $tfile
-          sed --in-place 's/[[:space:]]\+$//' $dockerfile
-        done
+  docker: |
+    dockerfiles=$(find . -name "Dockerfile")
+    for dockerfile in $dockerfiles
+    do
+      tfile="$(mktemp /tmp/Dockerfile.XXXXX)"
+      echo "$(cat $dockerfile)" > $tfile
+      dockerfile-utils format --spaces 4 $tfile > $dockerfile
+      rm $tfile
+      sed --in-place 's/[[:space:]]\+$//' $dockerfile
+    done
 
   json:
     cmds:
@@ -84,10 +82,9 @@ tasks:
 
   # ---------
   default:
-    cmds:
-      - task: ws
-      - task: docker
-      - task: json
-      - task: yaml
-      - task: md
-      - task: shell
+    - task: ws
+    - task: docker
+    - task: json
+    - task: yaml
+    - task: md
+    - task: shell

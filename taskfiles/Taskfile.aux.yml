@@ -15,9 +15,7 @@ tasks:
 
   graph: yml2dot {{.CLI_ARGS}}.yml | dot -Tpng > {{.CLI_ARGS}}.png
 
-  default:
-    cmds:
-      - |
-        echo "Config directory: {{.CONFIG_DIR}}"
-        echo "Scripts directory: {{.SCRIPTS_DIR}}"
-        echo "Build directory: {{.BUILD_DIR}}"
+  default: |
+    echo "Config directory: {{.CONFIG_DIR}}"
+    echo "Scripts directory: {{.SCRIPTS_DIR}}"
+    echo "Build directory: {{.BUILD_DIR}}"

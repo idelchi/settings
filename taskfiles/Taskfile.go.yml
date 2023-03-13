@@ -29,15 +29,13 @@ tasks:
       - test -d {{.BUILD_DIR}}
 
   clean:
-    cmds:
-      - rm -rf {{.BUILD_DIR}}
-      - rm -rf .cache
-      - go clean -testcache
+    - rm -rf {{.BUILD_DIR}}
+    - rm -rf .cache
+    - go clean -testcache
 
   mod:
-    cmds:
-      - go mod download
-      - go mod tidy
+    - go mod download
+    - go mod tidy
 
   # Build
   # ---------
@@ -135,10 +133,9 @@ tasks:
       - './{{.COVER_REPORT}}.html'
 
   race:
-    cmds:
-      - task: test
-        vars:
-          MODE: '-race'
+    - task: test
+      vars:
+        MODE: '-race'
 
   msan:
     cmds:
@@ -152,10 +149,9 @@ tasks:
 
   # TODO: Add fuzzing target to the Taskfile for Go.
   fuzz:
-    cmds:
-      - task: test
-        vars:
-          MODE: '--not--implemented'
+    - task: test
+      vars:
+        MODE: '--not--implemented'
 
   genprofile:
     desc: generate profiles for go project
@@ -201,30 +197,28 @@ tasks:
     vars:
       COVER_REPORT: '{{.BUILD_DIR}}/{{.COVER_REPORT}}'
 
-  cover-prereq:
-    cmds:
-      - |
-        for package in {{.PACKAGES}}; do
-          prefix={{.PROJECT}}
-          pkg=${package#$prefix}
+  cover-prereq: |
+    for package in {{.PACKAGES}}; do
+      prefix={{.PROJECT}}
+      pkg=${package#$prefix}
 
-          #skipping root package
-          if [ -z "$pkg" ]; then
-            continue
-          fi
+      #skipping root package
+      if [ -z "$pkg" ]; then
+        continue
+      fi
 
-          file="./$pkg/*_test.go"
-          if ! ls $file 1> /dev/null 2>&1; then
-            echo "$package is missing a _test.go file, creating it!"
-            if [ -z "$pkg" ]; then
-              basename=$(basename $prefix)
-            else
-              basename=$(basename $pkg)
-            fi
-            test_file=./$pkg/${basename}_test.go
-            echo "package ${basename}_test" >> $test_file
-          fi
-        done
+      file="./$pkg/*_test.go"
+      if ! ls $file 1> /dev/null 2>&1; then
+        echo "$package is missing a _test.go file, creating it!"
+        if [ -z "$pkg" ]; then
+          basename=$(basename $prefix)
+        else
+          basename=$(basename $pkg)
+        fi
+        test_file=./$pkg/${basename}_test.go
+        echo "package ${basename}_test" >> $test_file
+      fi
+    done
 
   coverage:
     desc: calculate coverage value
@@ -291,12 +285,10 @@ tasks:
       - goda graph -short ./... | dot -T jpg -o {{.BUILD_DIR}}/dependencies.jpg
 
   # ---------
-  all:
-    cmds:
-      - task: mod
-      - task: format
-      - task: lint
-      - task: build
-      - task: quality
-      - task: profile
-      - task: graph
+  default:
+    - task: mod
+    - task: format
+    - task: lint
+    - task: build
+    - task: quality
+    - task: graph
