@@ -19,3 +19,5 @@ tasks:
       - task: git:info
       - task: format
       - task: lint
+
+  docker: docker compose run --rm devenv task {{.CLI_ARGS}}

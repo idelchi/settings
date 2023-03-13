@@ -7,7 +7,7 @@ services:
     image: idelchi/devenv:local
     container_name: devenv
     hostname: devenv
-    BUILD_DIR:
+    build:
       context: .
     ports:
       # <host:container>
@@ -18,6 +18,6 @@ services:
     network_mode: bridge
     user: user
     volumes:
-      - ${PWD}:/home/user
+      - .:/home/user
     extra_hosts:
       - host:host-gateway
